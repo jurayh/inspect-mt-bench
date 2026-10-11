@@ -1,0 +1,39 @@
+{
+  "schema": "evalwarden.findings",
+  "schema_version": "1.0",
+  "tool": {
+    "name": "evalwarden",
+    "version": "0.13.1"
+  },
+  "eval_id": "mt_bench",
+  "adapter": {
+    "name": "inspect",
+    "version": "0.3.0"
+  },
+  "verdict": "PASS",
+  "score": 95,
+  "findings": [
+    {
+      "check_id": "COST-003",
+      "severity": "medium",
+      "confidence": "high",
+      "title": "100% of spend burned on non-passing attempts",
+      "message": "When the majority of token spend goes to attempts that never pass, the headline cost per success is dominated by failure, not by the solver doing useful work. That pattern points at a broken solver, a broken task set, or both.",
+      "evidence": [
+        "$0.0066 of $0.0066 estimated (100%) went to attempts that never passed.",
+        "Cost per success is dominated by failure, not by useful work."
+      ],
+      "locations": [
+        {
+          "file": "2026-10-11T03-07-05-00-00_mt-bench_nnXBBvoCxZXAX3gCSqBKem.eval",
+          "excerpt": "attempts[] tokens_in/tokens_out/tries"
+        }
+      ],
+      "remediation": "Break down spend by attempt outcome before quoting cost per success; investigate tasks that burn budget without ever passing.",
+      "fingerprint": "e93e9160f2f069a7"
+    }
+  ],
+  "unsupported": [
+    "2026-10-11T03-07-05-00-00_mt-bench_nnXBBvoCxZXAX3gCSqBKem.eval: scorer explanations redacted (raw scorer text is not stored; structured verdicts only)"
+  ]
+}

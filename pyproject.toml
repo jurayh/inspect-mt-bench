@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inspect-mt-bench"
+version = "0.1.0"
+description = "MT-Bench (Zheng et al., 2023) as an Inspect AI evaluation: 80 two-turn questions graded by an LLM judge on the official 1-10 scale."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "Yuriy H" }]
+keywords = ["inspect-ai", "evaluation", "mt-bench", "llm-judge"]
+dependencies = ["inspect_ai>=0.3"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.entry-points."inspect_ai"]
+mt_bench = "inspect_mt_bench:mt_bench"
+
+[project.urls]
+Homepage = "https://github.com/jurayh/inspect-mt-bench"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88

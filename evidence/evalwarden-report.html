@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>evalwarden report: mt_bench</title>
+<style>
+  :root { color-scheme: light; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+         margin: 0; color: #1a1a1a; background: #fafafa; line-height: 1.5; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 32px 24px 64px; }
+  .verdict { border-radius: 10px; padding: 20px 24px; margin-bottom: 24px; color: #fff; }
+  .verdict.blocked { background: #b3261e; }
+  .verdict.pass { background: #1e7b34; }
+  .verdict h1 { margin: 0 0 4px; font-size: 22px; }
+  .verdict .score { font-size: 40px; font-weight: 700; }
+  .verdict p { margin: 4px 0 0; opacity: .92; }
+  .card { background: #fff; border: 1px solid #e3e3e3; border-radius: 10px;
+          padding: 18px 20px; margin-bottom: 16px; }
+  .card h2 { margin: 0 0 8px; font-size: 16px; }
+  .badge { display: inline-block; font-size: 12px; font-weight: 700; border-radius: 6px;
+           padding: 2px 8px; margin-right: 6px; text-transform: uppercase; letter-spacing: .04em; }
+  .sev-error { background: #fdecea; color: #b3261e; border: 1px solid #f5c6c2; }
+  .sev-high { background: #fff4e5; color: #8a5a00; border: 1px solid #f0d9a8; }
+  .sev-medium { background: #eef4ff; color: #1a56db; border: 1px solid #c9dbff; }
+  .sev-low { background: #f1f1f1; color: #555; border: 1px solid #ddd; }
+  .conf { background: #f1f1f1; color: #444; border: 1px solid #ddd; text-transform: none; }
+  .meta { color: #666; font-size: 13px; }
+  ul.ev { margin: 8px 0; padding-left: 20px; }
+  code.loc { background: #f4f4f4; padding: 1px 6px; border-radius: 4px; font-size: 12.5px; }
+  .fix { background: #f6fef7; border-left: 4px solid #1e7b34; padding: 10px 12px;
+         border-radius: 0 8px 8px 0; margin-top: 10px; }
+  .fix strong { color: #1e7b34; }
+  table.map { width: 100%; border-collapse: collapse; font-size: 14px; }
+  table.map th, table.map td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #eee; }
+  table.map th { color: #666; font-weight: 600; width: 34%; }
+  .fp { font-family: ui-monospace, monospace; font-size: 12px; color: #888; }
+  footer { margin-top: 32px; color: #888; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="verdict pass">
+    <h1>evalwarden report: mt_bench</h1>
+    <div class="score">95 / 100</div>
+    <p>
+      
+      <strong>PASS</strong> &mdash; no blocking findings observed under this policy.
+      
+    </p>
+    <p class="meta" style="color:#fff;opacity:.85">Adapter: inspect 0.3.0
+    &middot; 1 finding(s)
+    &middot; integrity score is diagnostic, not a certification.</p>
+  </div>
+
+  
+  <div class="card">
+    <h2>Findings (1)</h2>
+    <p class="meta">Every finding carries a confidence label. Precision over recall:
+    a finding is only raised on direct evidence or a strong, named signal.</p>
+  </div>
+  
+  <div class="card">
+    <h2>
+      <span class="badge sev-medium">medium</span><span class="badge conf">confidence: high</span>COST-003 &mdash; 100% of spend burned on non-passing attempts
+    </h2>
+    <p>When the majority of token spend goes to attempts that never pass, the headline cost per success is dominated by failure, not by the solver doing useful work. That pattern points at a broken solver, a broken task set, or both.</p>
+    
+    <ul class="ev">
+      <li>$0.0066 of $0.0066 estimated (100%) went to attempts that never passed.</li><li>Cost per success is dominated by failure, not by useful work.</li>
+    </ul>
+    
+    
+    <p>
+      <code class="loc">2026-10-11T03-07-05-00-00_mt-bench_nnXBBvoCxZXAX3gCSqBKem.eval -- attempts[] tokens_in/tokens_out/tries</code>
+    </p>
+    
+    
+    <div class="fix"><strong>Fix:</strong> Break down spend by attempt outcome before quoting cost per success; investigate tasks that burn budget without ever passing.</div>
+    
+    <p class="fp">fingerprint: e93e9160f2f069a7</p>
+  </div>
+  
+  
+
+  <div class="card">
+    <h2>Measurement map</h2>
+    <table class="map">
+      <tr><th>Dataset</th><td>2 task(s)</td></tr>
+      <tr><th>Evidence boundary</th><td>0 env var(s) visible to agent,
+        0 mount(s)</td></tr>
+      <tr><th>Grader</th><td>script</td></tr>
+      <tr><th>Runs</th><td>0 passed / 2 attempted</td></tr>
+    </table>
+  </div>
+
+  
+  <div class="card">
+    <h2>Cost and efficiency</h2>
+    <table class="map">
+      <tr><th>Attempts / successes</th><td>2 / 0</td></tr>
+      <tr><th>Tokens in / out</th><td>893 / 264</td></tr>
+      <tr><th>Estimated total</th><td>$0.0066</td></tr>
+      <tr><th>Cost per success</th><td>n/a (no successes)</td></tr>
+      
+      
+      <tr><th>Wasted on non-passing attempts</th><td>$0.0066 (100% of spend)</td></tr>
+      <tr><th>Output tokens per attempt</th><td>p50 132 &middot; p90 132 &middot; max 132 (991)</td></tr>
+      
+    </table>
+    <p class="meta">Estimates from $3.0/$ 15.0 per 1M input/output tokens. Not metered billing.</p>
+  </div>
+  
+
+  <div class="card">
+    <h2>Reproducibility manifest</h2>
+    <table class="map">
+      <tr><th>Adapter</th><td>inspect 0.3.0</td></tr>
+      
+      <tr><th>2026-10-11T03-07-05-00-00_mt-bench_nnXBBvoCxZXAX3gCSqBKem.eval</th><td class="fp">sha256:0d3b9c98b448e686&hellip;</td></tr>
+      
+    </table>
+    
+    <p class="meta">Coverage gaps &mdash; seen but not translated into the integrity model:</p>
+    <ul class="ev meta">
+      <li>2026-10-11T03-07-05-00-00_mt-bench_nnXBBvoCxZXAX3gCSqBKem.eval: scorer explanations redacted (raw scorer text is not stored; structured verdicts only)</li>
+    </ul>
+    
+  </div>
+
+  <footer>
+    Generated by evalwarden 0.13.1. Secret values are never stored in reports.
+    Offline, read-only audit: input files were not modified.
+  </footer>
+
+</div>
+</body>
+</html>
